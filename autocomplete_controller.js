@@ -165,4 +165,7 @@ export default class extends Controller {
       this.element.addEventListener('change', this._checkSelectStatus)
     }
   }
+
+  _onConnect (event) {
+  }
 }
