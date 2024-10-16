@@ -22,7 +22,7 @@ Before using this Stimulus controller, make sure you have the following packages
 
 ### 1. Add the Stimulus Controller to Your JavaScript
 
-Copy the JavaScript code into your assets/controllers/form--custom-autocomplete_controller.js file or wherever you manage your Stimulus controllers. [custom-autocomplete_controller.js](./autocomplete_controller.js)
+Copy the JavaScript code into your assets/controllers/form--custom-autocomplete_controller.js file or wherever you manage your Stimulus controllers. [autocomplete-select-all_controller.js](./autocomplete-select-all_controller.js)
 
 ### 2. Add the Necessary HTML Attributes to Your Form or HTML
 
