@@ -30,7 +30,7 @@ In your Symfony form type or HTML, add the following attributes to your autocomp
 
 ```php
 'attr' => [
-    'data-controller' => 'form--autocomplete-select-all',
+    'data-controller' => 'autocomplete-select-all',
     'data-label-select-all' => '<your label>',  // Example: 'Select All'
     'data-label-deselect-all' => '<your label>',  // Example: 'Deselect All'
 ],
