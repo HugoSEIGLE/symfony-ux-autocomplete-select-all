@@ -40,33 +40,10 @@ export default class extends Controller {
     unselectAllButton.addEventListener('click', this._unselectAll)
   }
 
-  async _loadAndSelectAll (event) {
-    const url = this.element.getAttribute('data-symfony--ux-autocomplete--autocomplete-url-value')
-
-    if (!url) {
-      console.error('The URL is not defined to load the options.')
-      return
-    }
-
-    let allOptions = []
-    let page = 1
-    let hasMore = true
-
+  async _loadAndSelectAll () {
     try {
-      while (hasMore) {
-        const response = await fetch(`${url}?page=${page}`)
-        if (!response.ok) throw new Error('Error while loading options')
-
-        const data = await response.json()
-
-        allOptions = [...allOptions, ...data.results]
-
-        if (data.results.length < 10) {
-          hasMore = false
-        }
-
-        page += 1
-      }
+      const allOptions = await this._fetchAllOptions()
+      if (allOptions === null) return
 
       const tomSelectInstance = this._getOrCreateTomSelectInstance()
 
@@ -83,7 +60,7 @@ export default class extends Controller {
     }
   }
 
-  _unselectAll (event) {
+  _unselectAll () {
     const tomSelectInstance = this._getOrCreateTomSelectInstance()
     tomSelectInstance.clear()
 
@@ -91,50 +68,52 @@ export default class extends Controller {
   }
 
   async _checkSelectStatus () {
+    try {
+      const allOptions = await this._fetchAllOptions()
+      if (allOptions === null) return
+
+      const tomSelectInstance = this._getOrCreateTomSelectInstance()
+      const selectedValues = tomSelectInstance.getValue()
+
+      const allOptionValues = allOptions.map((option) => option.value)
+      const allSelected = allOptionValues.every((value) => selectedValues.includes(value))
+
+      if (allOptionValues.length > 0) {
+        this._toggleButtons(!allSelected)
+      }
+    } catch (error) {
+      console.error('Error : ', error)
+    }
+  }
+
+  async _fetchAllOptions () {
     const url = this.element.getAttribute('data-symfony--ux-autocomplete--autocomplete-url-value')
 
     if (!url) {
-      console.error('URL not found to check the select status.')
-      return
+      console.error('The URL is not defined to load the options.')
+      return null
     }
 
     let allOptions = []
     let page = 1
     let hasMore = true
 
-    try {
-      while (hasMore) {
-        const response = await fetch(`${url}?page=${page}`)
-        if (!response.ok) throw new Error('Error while loading options')
+    while (hasMore) {
+      const response = await fetch(`${url}?page=${page}`)
+      if (!response.ok) throw new Error('Error while loading options')
 
-        const data = await response.json()
+      const data = await response.json()
 
-        allOptions = [...allOptions, ...data.results]
+      allOptions = [...allOptions, ...data.results]
 
-        if (data.results.length < 10) {
-          hasMore = false
-        }
-
-        page += 1
+      if (data.results.length < 10) {
+        hasMore = false
       }
 
-      const tomSelectInstance = this._getOrCreateTomSelectInstance()
-      const selectedValues = tomSelectInstance.getValue()
-
-      const allOptionValues = allOptions.map((option) => option.value)
-
-      const allSelected = allOptionValues.every((value) => selectedValues.includes(value))
-
-      if (allOptionValues.length > 0) {
-        if (allSelected) {
-          this._toggleButtons(false)
-        } else {
-          this._toggleButtons(true)
-        }
-      }
-    } catch (error) {
-      console.error('Error : ', error)
+      page += 1
     }
+
+    return allOptions
   }
 
   _getOrCreateTomSelectInstance () {
@@ -166,6 +145,6 @@ export default class extends Controller {
     }
   }
 
-  _onConnect (event) {
+  _onConnect () {
   }
 }

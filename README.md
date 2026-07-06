@@ -22,7 +22,7 @@ Before using this Stimulus controller, make sure you have the following packages
 
 ### 1. Add the Stimulus Controller to Your JavaScript
 
-Copy the JavaScript code into your assets/controllers/form--autocomplete-select-all_controller.js file or wherever you manage your Stimulus controllers. [autocomplete-select-all_controller.js](./autocomplete-select-all_controller.js)
+Copy the JavaScript code into your `assets/controllers/` directory, e.g. `assets/controllers/autocomplete-select-all_controller.js`. [autocomplete-select-all_controller.js](./autocomplete-select-all_controller.js)
 
 ### 2. Add the Necessary HTML Attributes to Your Form or HTML
 
@@ -30,11 +30,18 @@ In your Symfony form type or HTML, add the following attributes to your autocomp
 
 ```php
 'attr' => [
-    'data-controller' => 'autocomplete-select-all',
+    'data-controller' => '<your-controller-name>',
     'data-label-select-all' => '<your label>',  // Example: 'Select All'
     'data-label-deselect-all' => '<your label>',  // Example: 'Deselect All'
 ],
 ```
+
+The value of `data-controller` must match the Stimulus identifier generated from where you put the controller file, following [Symfony UX's auto-naming convention](https://symfony.com/bundles/StimulusBundle/current/index.html#defining-stimulus-controllers):
+
+- If the file lives directly in `assets/controllers/autocomplete-select-all_controller.js`, the identifier is `autocomplete-select-all`.
+- If you organize your controllers into subfolders (e.g. `assets/controllers/form/autocomplete-select-all_controller.js`), the folder name is prefixed with `--`, so the identifier becomes `form--autocomplete-select-all`.
+
+Adjust the `data-controller` value to match your own folder structure — the example above with the `form--` prefix in earlier versions of this doc assumed a `form/` subfolder, which may not apply to your project.
 
 This will ensure that the controller attaches the select/unselect buttons to the autocomplete input.
 
