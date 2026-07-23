@@ -25,7 +25,6 @@
     "php": ">=8.2",
     "symfony/dependency-injection": "^6.4|^7.0|^8.0",
     "symfony/http-kernel": "^6.4|^7.0|^8.0",
-    "symfony/runtime": "^8.1",
     "symfony/stimulus-bundle": "^2.13|^3.0",
     "symfony/ux-autocomplete": "^2.17"
   },
@@ -50,10 +49,7 @@
     "audit": {
       "block-insecure": false
     },
-    "sort-packages": true,
-    "allow-plugins": {
-      "symfony/runtime": true
-    }
+    "sort-packages": true
   },
   "extra": {
     "branch-alias": {
