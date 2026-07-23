@@ -1,0 +1,63 @@
+name: Bug report
+description: Report reproducible incorrect behavior.
+title: '[Bug]: '
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for taking the time to provide a minimal, reproducible report.
+
+  - type: input
+    id: versions
+    attributes:
+      label: Versions
+      description: PHP, Symfony, Symfony UX Autocomplete and bundle versions.
+      placeholder: PHP 8.3, Symfony 7.3, UX Autocomplete 2.x, bundle 1.0.0
+    validations:
+      required: true
+
+  - type: dropdown
+    id: assets
+    attributes:
+      label: Asset system
+      options:
+        - AssetMapper
+        - Webpack Encore
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What happened and what did you expect?
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproducer
+    attributes:
+      label: Minimal reproducer
+      description: Link to a repository or provide the smallest relevant code.
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: Browser console, network response or server log output.
+      render: shell
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checklist
+      options:
+        - label: I searched existing issues and the FAQ.
+          required: true
+        - label: This report does not disclose a security vulnerability.
+          required: true
