@@ -42,8 +42,6 @@ jobs:
         include:
           - php: '8.4'
             symfony: '8.0.*'
-    env:
-      SYMFONY_REQUIRE: ${{ matrix.symfony }}
     steps:
       - uses: actions/checkout@v6
       - uses: shivammathur/setup-php@v2
@@ -52,10 +50,14 @@ jobs:
           coverage: none
           tools: composer:v2
       - name: Install dependencies
+        env:
+          SYMFONY_REQUIRE: ${{ matrix.symfony }}
         run: |
-          composer config allow-plugins.symfony/flex true
-          composer require --dev symfony/flex:^2.5 --no-update
-          composer update --prefer-dist --no-progress --with-all-dependencies
+          composer update --prefer-dist --no-progress --with-all-dependencies \
+            --with "symfony/asset-mapper:${SYMFONY_REQUIRE}" \
+            --with "symfony/dependency-injection:${SYMFONY_REQUIRE}" \
+            --with "symfony/framework-bundle:${SYMFONY_REQUIRE}" \
+            --with "symfony/http-kernel:${SYMFONY_REQUIRE}"
       - name: PHPUnit
         run: composer test
 
