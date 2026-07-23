@@ -1,0 +1,4 @@
+assets/dist/
+demo/public/assets/
+node_modules/
+vendor/

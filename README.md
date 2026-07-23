@@ -1,79 +1,164 @@
-# Select / Unselect All Autocomplete with Symfony & Stimulus
+# Symfony UX Autocomplete Select All
 
-This repository contains a Stimulus controller for Symfony Autocomplete that adds "Select All" and "Unselect All" functionality to your autocomplete fields. This allows users to quickly select or deselect all available options in an autocomplete input.
+[![Latest stable version](https://img.shields.io/packagist/v/hugoseigle/symfony-ux-autocomplete-select-all?label=stable)](https://packagist.org/packages/hugoseigle/symfony-ux-autocomplete-select-all)
+[![Total downloads](https://img.shields.io/packagist/dt/hugoseigle/symfony-ux-autocomplete-select-all?label=downloads)](https://packagist.org/packages/hugoseigle/symfony-ux-autocomplete-select-all/stats)
+[![Monthly downloads](https://img.shields.io/packagist/dm/hugoseigle/symfony-ux-autocomplete-select-all?label=monthly)](https://packagist.org/packages/hugoseigle/symfony-ux-autocomplete-select-all/stats)
+[![GitHub stars](https://img.shields.io/github/stars/HugoSEIGLE/symfony-ux-autocomplete-select-all?style=flat)](https://github.com/HugoSEIGLE/symfony-ux-autocomplete-select-all/stargazers)
+[![Latest release](https://img.shields.io/github/v/release/HugoSEIGLE/symfony-ux-autocomplete-select-all?label=release)](https://github.com/HugoSEIGLE/symfony-ux-autocomplete-select-all/releases)
 
-## Features ✨
+[![CI](https://github.com/HugoSEIGLE/symfony-ux-autocomplete-select-all/actions/workflows/ci.yaml/badge.svg)](https://github.com/HugoSEIGLE/symfony-ux-autocomplete-select-all/actions/workflows/ci.yaml)
+[![CodeQL](https://github.com/HugoSEIGLE/symfony-ux-autocomplete-select-all/actions/workflows/codeql.yaml/badge.svg)](https://github.com/HugoSEIGLE/symfony-ux-autocomplete-select-all/actions/workflows/codeql.yaml)
+[![PHP](https://img.shields.io/packagist/dependency-v/hugoseigle/symfony-ux-autocomplete-select-all/php?label=PHP)](composer.json)
+[![License](https://img.shields.io/packagist/l/hugoseigle/symfony-ux-autocomplete-select-all)](LICENSE)
 
- - Select All: Automatically select all options in the autocomplete field.
- - Unselect All: Clear all selected options.
- - Responsive to changes: Buttons toggle based on the current selection.
- - Customizable labels: Easily change button labels for select/deselect actions.
+A small Symfony UX bundle that adds accessible **Select all** and **Deselect
+all** controls to a multiple [Symfony UX Autocomplete](https://symfony.com/bundles/ux-autocomplete/current/index.html)
+field.
 
-## Requirements 🛠️
+It follows the endpoint's pagination, reuses the Tom Select instance managed by
+Symfony UX and works with both AssetMapper and Webpack Encore.
 
-Before using this Stimulus controller, make sure you have the following packages installed in your Symfony project:
+![Autocomplete Select All demo](docs/images/demo.svg)
 
-1. Symfony (v5.2+)
-2. Symfony UX Autocomplete (Symfony UX)
-3. Stimulus (included with Symfony UX)
-4. TomSelect (for enhanced autocomplete functionality)
+## Features
 
-## Installation Steps 🚀
+- Selects results across every remote autocomplete page.
+- Supports Symfony UX's `next_page` response and the historical 10-item page
+  format.
+- Keeps controls synchronized when the selection changes.
+- Uses Stimulus values and targets for labels, classes and advanced settings.
+- Aborts in-flight requests and removes every listener and generated element on
+  `disconnect()`.
+- Does not instantiate or replace Tom Select.
+- Supports grouped Symfony UX Autocomplete responses.
 
-### 1. Add the Stimulus Controller to Your JavaScript
+## Requirements
 
-Copy the JavaScript code into your `assets/controllers/` directory, e.g. `assets/controllers/autocomplete-select-all_controller.js`. [autocomplete-select-all_controller.js](./autocomplete-select-all_controller.js)
+| Dependency              | Supported versions              |
+| ----------------------- | ------------------------------- |
+| PHP                     | 8.2, 8.3, 8.4                   |
+| Symfony                 | 6.4, 7.x, 8.x                   |
+| Symfony UX Autocomplete | 2.17 or later in the 2.x series |
+| Stimulus                | 3.2 or later                    |
+| Assets                  | AssetMapper or Webpack Encore   |
 
-### 2. Add the Necessary HTML Attributes to Your Form or HTML
+## Installation
 
-In your Symfony form type or HTML, add the following attributes to your autocomplete field:
+```bash
+composer require hugoseigle/symfony-ux-autocomplete-select-all
+```
+
+If Symfony Flex does not register third-party bundles in your application,
+enable it manually:
 
 ```php
-'attr' => [
-    'data-controller' => '<your-controller-name>',
-    'data-label-select-all' => '<your label>',  // Example: 'Select All'
-    'data-label-deselect-all' => '<your label>',  // Example: 'Deselect All'
-],
+// config/bundles.php
+use HugoSeigle\SymfonyUx\AutocompleteSelectAll\SymfonyUxAutocompleteSelectAllBundle;
+
+return [
+    // ...
+    SymfonyUxAutocompleteSelectAllBundle::class => ['all' => true],
+];
 ```
 
-The value of `data-controller` must match the Stimulus identifier generated from where you put the controller file, following [Symfony UX's auto-naming convention](https://symfony.com/bundles/StimulusBundle/current/index.html#defining-stimulus-controllers):
+The package exposes its controller through the standard Symfony UX asset
+manifest. AssetMapper consumes it directly; Encore installs and resolves the
+corresponding npm package through the usual Symfony UX workflow.
 
-- If the file lives directly in `assets/controllers/autocomplete-select-all_controller.js`, the identifier is `autocomplete-select-all`.
-- If you organize your controllers into subfolders (e.g. `assets/controllers/form/autocomplete-select-all_controller.js`), the folder name is prefixed with `--`, so the identifier becomes `form--autocomplete-select-all`.
+See the complete [installation guide](docs/installation.md), including manual
+AssetMapper and Encore setup.
 
-Adjust the `data-controller` value to match your own folder structure — the example above with the `form--` prefix in earlier versions of this doc assumed a `form/` subfolder, which may not apply to your project.
+## Usage
 
-This will ensure that the controller attaches the select/unselect buttons to the autocomplete input.
+Place this controller on a wrapper and mark the multiple autocomplete field as
+its `field` target:
 
-## 3. Customization: Non-Bootstrap Projects
+```twig
+{% set select_all_controller =
+    'hugoseigle/symfony-ux-autocomplete-select-all/select-all' %}
 
-If you're not using Bootstrap, you'll need to modify the button classes in the controller for custom styling.
-
-
-Line 27 :
-
-```js
-loadAllButton.classList.add('btn', 'btn-outline-primary', 'btn-sm', 'float-end', 'd-none', 'select-all-button')
+<div {{ stimulus_controller(select_all_controller, {
+    selectAllLabel: 'Select every country',
+    deselectAllLabel: 'Clear the selection'
+}) }}>
+    <select
+        multiple
+        {{ stimulus_controller('symfony/ux-autocomplete/autocomplete', {
+            url: path('app_country_autocomplete')
+        }) }}
+        {{ stimulus_target(select_all_controller, 'field') }}
+    ></select>
+</div>
 ```
 
-Line 38 :
+The autocomplete endpoint keeps its normal Symfony UX response:
 
-```js
-unselectAllButton.classList.add('btn', 'btn-outline-danger', 'btn-sm', 'float-end', 'd-none', 'unselect-all-button')
+```json
+{
+    "results": [
+        { "value": "1", "text": "France" },
+        { "value": "2", "text": "Germany" }
+    ],
+    "next_page": "/autocomplete/countries?page=2"
+}
 ```
 
-Modify this lines to fit your project's button styling classes.
+No separate URL is needed: by default, the controller reads the URL value
+already configured on Symfony UX Autocomplete.
 
-## Usage Example 🎯
+## Configuration
 
-Once integrated, users will be able to:
+| Stimulus value       | Type   | Default                                             | Purpose                                   |
+| -------------------- | ------ | --------------------------------------------------- | ----------------------------------------- |
+| `url`                | string | Autocomplete URL                                    | Overrides the endpoint used by Select all |
+| `selectAllLabel`     | string | `Select All`                                        | Select button label                       |
+| `deselectAllLabel`   | string | `Deselect All`                                      | Clear button label                        |
+| `selectAllClasses`   | string | `btn btn-outline-primary btn-sm select-all-button`  | Select button classes                     |
+| `deselectAllClasses` | string | `btn btn-outline-danger btn-sm unselect-all-button` | Clear button classes                      |
+| `controlsClasses`    | string | `autocomplete-select-all-controls`                  | Generated controls wrapper classes        |
+| `pageSize`           | number | `10`                                                | Legacy pagination fallback size           |
+| `maxPages`           | number | `1000`                                              | Pagination loop safety limit              |
 
-1. Click "Select All": Automatically fetch and select all options from the server.
-2. Click "Deselect All": Clear all selected options.
-3. Buttons will toggle based on the current selection state, making it intuitive for users to manage large sets of options.
+Buttons use the native `hidden` attribute, so Bootstrap is optional. Replace the
+class values when using another design system.
 
-## Conclusion
+See [configuration](docs/configuration.md) and [examples](docs/examples.md) for
+custom controls, Symfony Forms and both asset systems.
 
-By following these steps, you can easily implement a select/unselect all feature in your Symfony project using Stimulus and Symfony UX Autocomplete. If you run into any issues or have suggestions for improvements, feel free to open an issue or submit a PR!
+## Demo
 
-Enjoy coding! 😎
+The [`demo/`](demo/) directory is a complete Symfony 6.4 AssetMapper
+application. It installs this bundle from its parent directory with a Composer
+`path` repository.
+
+```bash
+cd demo
+composer install
+symfony serve
+```
+
+Then open the URL printed by Symfony CLI.
+
+## Contributing
+
+Bug reports and pull requests are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md)
+for the local workflow, quality checks and contribution rules.
+
+Please report vulnerabilities privately as described in
+[SECURITY.md](SECURITY.md).
+
+## Roadmap
+
+- Publish the 1.x Composer and npm packages.
+- Add optional progress feedback for very large datasets.
+- Evaluate an opt-in confirmation threshold before selecting thousands of
+  records.
+- Track future Symfony UX Autocomplete pagination changes without relying on
+  private APIs.
+
+Backward compatibility follows semantic versioning. See
+[CHANGELOG.md](CHANGELOG.md) for release notes.
+
+## License
+
+Symfony UX Autocomplete Select All is released under the [MIT License](LICENSE).

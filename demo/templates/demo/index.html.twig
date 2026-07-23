@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <main class="demo">
+        <p class="eyebrow">Symfony UX bundle</p>
+        <h1>Select every option. Instantly.</h1>
+        <p class="lead">
+            The controller follows every page returned by Symfony UX Autocomplete,
+            reuses its Tom Select instance and keeps the controls synchronized.
+        </p>
+
+        <div
+            data-controller="hugoseigle--symfony-ux-autocomplete-select-all--select-all"
+            data-hugoseigle--symfony-ux-autocomplete-select-all--select-all-select-all-label-value="Select all countries"
+            data-hugoseigle--symfony-ux-autocomplete-select-all--select-all-deselect-all-label-value="Clear selection"
+        >
+            <label for="countries">European Union countries</label>
+            <select
+                id="countries"
+                name="countries[]"
+                multiple
+                data-controller="symfony--ux-autocomplete--autocomplete"
+                data-hugoseigle--symfony-ux-autocomplete-select-all--select-all-target="field"
+                data-symfony--ux-autocomplete--autocomplete-url-value="{{ path('app_countries') }}"
+                data-symfony--ux-autocomplete--autocomplete-min-characters-value="0"
+                data-symfony--ux-autocomplete--autocomplete-preload-value="focus"
+            ></select>
+        </div>
+
+        <p class="hint">Choose a few countries, select all 27, then clear the field.</p>
+    </main>
+{% endblock %}

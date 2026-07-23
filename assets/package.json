@@ -1,0 +1,43 @@
+{
+  "name": "@hugoseigle/symfony-ux-autocomplete-select-all",
+  "version": "1.0.0",
+  "description": "Select or deselect every option in a Symfony UX Autocomplete field.",
+  "license": "MIT",
+  "keywords": [
+    "autocomplete",
+    "stimulus",
+    "symfony",
+    "symfony-ux",
+    "tom-select"
+  ],
+  "homepage": "https://github.com/HugoSEIGLE/symfony-ux-autocomplete-select-all",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HugoSEIGLE/symfony-ux-autocomplete-select-all.git"
+  },
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "main": "dist/controller.js",
+  "exports": {
+    ".": "./dist/controller.js"
+  },
+  "symfony": {
+    "controllers": {
+      "select-all": {
+        "main": "dist/controller.js",
+        "webpackMode": "lazy",
+        "fetch": "lazy",
+        "enabled": true
+      }
+    },
+    "importmap": {
+      "@hotwired/stimulus": "^3.2.0"
+    }
+  },
+  "peerDependencies": {
+    "@hotwired/stimulus": "^3.2.0",
+    "@symfony/ux-autocomplete": "^2.17.0"
+  }
+}

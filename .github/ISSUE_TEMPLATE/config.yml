@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/HugoSEIGLE/symfony-ux-autocomplete-select-all/security/advisories/new
+    about: Report vulnerabilities privately.
+  - name: Symfony UX Autocomplete documentation
+    url: https://symfony.com/bundles/ux-autocomplete/current/index.html
+    about: Check upstream Autocomplete behavior and configuration.
