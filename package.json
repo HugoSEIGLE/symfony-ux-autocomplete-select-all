@@ -22,7 +22,7 @@
     "jsdom": "^26.0.0",
     "prettier": "^3.4.2",
     "rollup": "^4.30.0",
-    "vitest": "^3.0.0"
+    "vitest": "^4.1.10"
   },
   "engines": {
     "node": ">=20"
