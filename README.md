@@ -7,7 +7,9 @@
 [![Latest release](https://img.shields.io/github/v/release/HugoSEIGLE/symfony-ux-autocomplete-select-all?label=release)](https://github.com/HugoSEIGLE/symfony-ux-autocomplete-select-all/releases)
 
 [![CI](https://github.com/HugoSEIGLE/symfony-ux-autocomplete-select-all/actions/workflows/ci.yaml/badge.svg)](https://github.com/HugoSEIGLE/symfony-ux-autocomplete-select-all/actions/workflows/ci.yaml)
+[![Codecov](https://codecov.io/gh/HugoSEIGLE/symfony-ux-autocomplete-select-all/branch/main/graph/badge.svg)](https://codecov.io/gh/HugoSEIGLE/symfony-ux-autocomplete-select-all)
 [![CodeQL](https://github.com/HugoSEIGLE/symfony-ux-autocomplete-select-all/actions/workflows/codeql.yaml/badge.svg)](https://github.com/HugoSEIGLE/symfony-ux-autocomplete-select-all/actions/workflows/codeql.yaml)
+[![PHPStan level](https://img.shields.io/badge/PHPStan-level_max-brightgreen.svg)](phpstan.neon.dist)
 [![PHP](https://img.shields.io/packagist/dependency-v/hugoseigle/symfony-ux-autocomplete-select-all/php?label=PHP)](composer.json)
 [![License](https://img.shields.io/packagist/l/hugoseigle/symfony-ux-autocomplete-select-all)](LICENSE)
 
@@ -34,13 +36,13 @@ Symfony UX and works with both AssetMapper and Webpack Encore.
 
 ## Requirements
 
-| Dependency              | Supported versions              |
-| ----------------------- | ------------------------------- |
-| PHP                     | 8.2, 8.3, 8.4                   |
-| Symfony                 | 6.4, 7.x, 8.x                   |
-| Symfony UX Autocomplete | 2.17 or later in the 2.x series |
-| Stimulus                | 3.2 or later                    |
-| Assets                  | AssetMapper or Webpack Encore   |
+| Dependency              | Supported versions            |
+| ----------------------- | ----------------------------- |
+| PHP                     | 8.2, 8.3, 8.4, 8.5            |
+| Symfony                 | 6.4, 7.x, 8.x                 |
+| Symfony UX Autocomplete | 2.17+ or 3.x                  |
+| Stimulus                | 3.2 or later                  |
+| Assets                  | AssetMapper or Webpack Encore |
 
 ## Installation
 
@@ -149,7 +151,6 @@ Please report vulnerabilities privately as described in
 
 ## Roadmap
 
-- Publish the 1.x Composer and npm packages.
 - Add optional progress feedback for very large datasets.
 - Evaluate an opt-in confirmation threshold before selecting thousands of
   records.

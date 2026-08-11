@@ -5,6 +5,21 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 and this project follows [Semantic Versioning](https://semver.org/).
 
+## Unreleased
+
+- Add Codecov reporting for PHP and JavaScript with an enforced coverage policy.
+- Test the maintained Symfony 6.4, 7.4, 8.0 and 8.1 branches on PHP 8.2–8.5.
+- Add support for Symfony UX Autocomplete 3.x.
+- Upgrade the PHP and JavaScript development toolchains and audit dependencies in CI.
+- Document CI, Codecov and maximum-level PHPStan checks with README badges.
+
+## [1.0.1] - 2026-07-23
+
+### Fixed
+
+- Correct the Symfony compatibility matrix used by CI.
+- Normalize the demo controller manifest.
+
 ## [1.0.0] - 2026-07-23
 
 ### Added
@@ -34,4 +49,6 @@ and this project follows [Semantic Versioning](https://semver.org/).
 - Labels are inserted with `textContent`, preventing label values from being
   interpreted as HTML.
 
+[Unreleased]: https://github.com/HugoSEIGLE/symfony-ux-autocomplete-select-all/compare/v1.0.1...HEAD
+[1.0.1]: https://github.com/HugoSEIGLE/symfony-ux-autocomplete-select-all/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/HugoSEIGLE/symfony-ux-autocomplete-select-all/releases/tag/v1.0.0

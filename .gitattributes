@@ -12,6 +12,7 @@
 /assets/src export-ignore
 /assets/tests export-ignore
 /composer.lock export-ignore
+/codecov.yml export-ignore
 /demo export-ignore
 /eslint.config.js export-ignore
 /node_modules export-ignore

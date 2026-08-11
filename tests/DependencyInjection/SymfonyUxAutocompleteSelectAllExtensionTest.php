@@ -20,6 +20,28 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 final class SymfonyUxAutocompleteSelectAllExtensionTest extends TestCase
 {
+    public function testItDoesNotConfigureAssetMapperWithoutFrameworkBundle(): void
+    {
+        $container = new ContainerBuilder();
+        $container->setParameter('kernel.bundles_metadata', []);
+
+        (new SymfonyUxAutocompleteSelectAllExtension())->prepend($container);
+
+        self::assertSame([], $container->getExtensionConfig('framework'));
+    }
+
+    public function testItDoesNotConfigureAssetMapperWhenFrameworkDoesNotSupportIt(): void
+    {
+        $container = new ContainerBuilder();
+        $container->setParameter('kernel.bundles_metadata', [
+            'FrameworkBundle' => ['path' => __DIR__],
+        ]);
+
+        (new SymfonyUxAutocompleteSelectAllExtension())->prepend($container);
+
+        self::assertSame([], $container->getExtensionConfig('framework'));
+    }
+
     public function testItRegistersTheControllerWithAssetMapper(): void
     {
         $container = new ContainerBuilder();

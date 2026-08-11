@@ -7,24 +7,27 @@
   ],
   "scripts": {
     "build": "rollup assets/src/controller.js --file assets/dist/controller.js --format es --external @hotwired/stimulus",
-    "check": "npm run lint && npm run format:check && npm test && npm run build:check",
+    "audit": "npm audit --audit-level=moderate",
+    "check": "npm run audit && npm run lint && npm run format:check && npm test && npm run build:check",
     "build:check": "npm run build && git diff --exit-code -- assets/dist/controller.js",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "eslint assets/src assets/tests",
-    "test": "vitest run"
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage"
   },
   "devDependencies": {
-    "@eslint/js": "^9.17.0",
+    "@eslint/js": "^10.0.0",
     "@hotwired/stimulus": "^3.2.2",
-    "eslint": "^9.17.0",
+    "@vitest/coverage-v8": "^4.1.0",
+    "eslint": "^10.0.0",
     "eslint-config-prettier": "^10.0.1",
-    "jsdom": "^26.0.0",
-    "prettier": "^3.4.2",
-    "rollup": "^4.30.0",
-    "vitest": "^3.0.0"
+    "jsdom": "^29.0.0",
+    "prettier": "^3.9.0",
+    "rollup": "^4.62.0",
+    "vitest": "^4.1.0"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=20.19.0"
   }
 }

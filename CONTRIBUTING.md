@@ -12,7 +12,7 @@ Thank you for helping improve Symfony UX Autocomplete Select All.
 
 ## Local setup
 
-Requirements are PHP 8.2+, Composer 2, Node.js 20+ and npm.
+Requirements are PHP 8.2+, Composer 2, Node.js 20.19+ and npm.
 
 ```bash
 composer install
