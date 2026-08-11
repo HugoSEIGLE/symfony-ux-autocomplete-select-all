@@ -40,7 +40,7 @@ Symfony UX and works with both AssetMapper and Webpack Encore.
 | ----------------------- | ----------------------------- |
 | PHP                     | 8.2, 8.3, 8.4, 8.5            |
 | Symfony                 | 6.4, 7.x, 8.x                 |
-| Symfony UX Autocomplete | 2.17+ or 3.x                  |
+| Symfony UX Autocomplete | 2.17+; 3.x requires PHP 8.4+  |
 | Stimulus                | 3.2 or later                  |
 | Assets                  | AssetMapper or Webpack Encore |
 

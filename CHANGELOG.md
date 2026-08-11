@@ -8,7 +8,8 @@ and this project follows [Semantic Versioning](https://semver.org/).
 ## Unreleased
 
 - Add Codecov reporting for PHP and JavaScript with an enforced coverage policy.
-- Test the maintained Symfony 6.4, 7.4, 8.0 and 8.1 branches on PHP 8.2–8.5.
+- Test the maintained Symfony 6.4, 7.4, 8.0 and 8.1 branches on PHP 8.2–8.5,
+  while keeping Symfony UX 3.x on PHP 8.4 or newer.
 - Add support for Symfony UX Autocomplete 3.x.
 - Upgrade the PHP and JavaScript development toolchains and audit dependencies in CI.
 - Document CI, Codecov and maximum-level PHPStan checks with README badges.
