@@ -26,12 +26,12 @@
     "symfony/dependency-injection": "^6.4|^7.0|^8.0",
     "symfony/http-kernel": "^6.4|^7.0|^8.0",
     "symfony/stimulus-bundle": "^2.13|^3.0",
-    "symfony/ux-autocomplete": "^2.17"
+    "symfony/ux-autocomplete": "^2.17|^3.0"
   },
   "require-dev": {
-    "friendsofphp/php-cs-fixer": "^3.64",
-    "phpstan/phpstan": "^1.12|^2.0",
-    "phpunit/phpunit": "^10.5|^11.0",
+    "friendsofphp/php-cs-fixer": "^3.95",
+    "phpstan/phpstan": "^2.2",
+    "phpunit/phpunit": "^11.5|^12.5|^13.3",
     "symfony/asset-mapper": "^6.4|^7.0|^8.0",
     "symfony/framework-bundle": "^6.4|^7.0|^8.0"
   },
@@ -46,9 +46,6 @@
     }
   },
   "config": {
-    "audit": {
-      "block-insecure": false
-    },
     "sort-packages": true
   },
   "extra": {
@@ -62,6 +59,7 @@
   "scripts": {
     "check": [
       "@composer-validate",
+      "composer audit",
       "@test",
       "@phpstan",
       "@cs-check"

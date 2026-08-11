@@ -40,9 +40,6 @@
       "symfony/flex": true,
       "symfony/runtime": true
     },
-    "audit": {
-      "block-insecure": false
-    },
     "sort-packages": true
   },
   "extra": {
