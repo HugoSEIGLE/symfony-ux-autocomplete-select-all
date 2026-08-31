@@ -20,7 +20,7 @@
     "@eslint/js": "^10.0.0",
     "@hotwired/stimulus": "^3.2.2",
     "@vitest/coverage-v8": "^4.1.0",
-    "eslint": "^10.0.0",
+    "eslint": "^10.9.1",
     "eslint-config-prettier": "^10.0.1",
     "jsdom": "^29.0.0",
     "prettier": "^3.9.0",
